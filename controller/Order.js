@@ -116,3 +116,26 @@ exports.getOrderByPhoneNumber = async(req,res)=>{
         })
     }
 }
+
+exports.getAllOrders = async(req, res) => {
+    try {
+        const orders = await Order.find({});
+        if (orders.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "No orders found"
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Orders retrieved successfully",
+            data: orders
+        });
+    } catch(err) {
+        console.log(err);
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error"
+        });
+    }
+}

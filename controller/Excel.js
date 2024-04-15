@@ -10,11 +10,7 @@ const productModel = require("../models/Product")
 
 async function updatePrices() {
     try {
-      // Create Google Sheets API client
-    //   const doc = new GoogleSpreadsheet(spreadsheetId);
-    //   await doc.useServiceAccountAuth(credentials);
-     // await doc.loadInfo();
-
+ 
     const serviceAccountAuth = new JWT({
         email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
         key: process.env.GOOGLE_PRIVATE_KEY,
