@@ -169,3 +169,47 @@ function isSupported(type,supportedType) {
     }
   }
 
+  exports.findProductsByCategory = async (req, res) => {
+    try {
+      //Fruits or Vegetable case sensetive
+      const { category } = req.body; // Assuming category is passed as a query parameter
+
+      if (!category) {
+        return res.status(400).json({
+          success: false,
+          message: "Category is required"
+        });
+      }
+
+      const categories = ['vegetable', 'fruits']; // Defined categories
+
+      if (!categories.includes(category.toLowerCase())) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid category. Please choose either 'vegetable' or 'fruit'"
+        });
+      }
+
+      const products = await Product.find({ category:category });
+
+      if (products.length === 0) {
+        return res.status(404).json({
+          success: false,
+          message: "No products found in this category"
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: "Products found",
+        data: products
+      });
+
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Internal Server Error"
+      });
+    }
+  }
