@@ -9,10 +9,10 @@ const user = require("./routes/auth")
 const product = require("./routes/products")
 const order = require("./routes/order")
 const update=require("./routes/excel")
+const cors = require('cors');
 
 
-
-
+app.use(cors());
 app.use(express.json());
 
 
@@ -34,6 +34,11 @@ app.use("/api/v1",user)
 app.use('/api/v1',product)
 app.use('/api/v1',order)
 app.use('/api/v1',update)
+
+app.get('/test', (req, res) => {
+    res.status(200).send('API is working properly');
+});
+
 
 
 
