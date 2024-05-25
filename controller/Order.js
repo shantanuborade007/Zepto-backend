@@ -25,7 +25,7 @@ exports.createOrder = async (req, res) => {
             data:savedOrder,
             id:savedOrder._id,
             message:"order created successfully !"
-        })
+        }) 
         
     } catch (error) {
         console.log(error)
@@ -87,7 +87,12 @@ exports.confirmOrder = async(req,res)=>{
 
 exports.getOrderByPhoneNumber = async(req,res)=>{
     try{
-    const { phoneNumber } = req.body;
+    // const { phoneNumber } = req.body;
+    console.log("cccccccc"+req.params+" "+ req.query.phoneNumber);
+    // const { phoneNumber } = req.params.phoneNumber;
+
+     const phoneNumber = '+' + req.query.phoneNumber;
+     
     if (!phoneNumber) {
         return res.status(400).json({
             success: false,
